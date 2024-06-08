@@ -4,3 +4,4 @@ selenium
 webdriver-manager
 pyperclip
 aiohttp
+flask
