@@ -11,18 +11,18 @@ def get_skins():
     price_from = request.args.get('price_from')
     price_to = request.args.get('price_to')
     
-    url = "https://dmarket.com/ingame-items/item-list/csgo-skins"
+    url = "https://shadowpay.com/csgo-items"
     
     if exterior == "factory":
-        url += "?exterior=factory"
+        url += "?exteriors=Factory New"
     elif exterior == "minimal":
-        url += "?exterior=minimal"
+        url += "?exteriors=Minimal Wear"
     elif exterior == "field-tested":
-        url += "?exterior=field-tested"
+        url += "?exteriors=Field-Tested"
     elif exterior == "well-worn":
-        url += "?exterior=well-worn"
+        url += "?exteriors=Well-Worn"
     elif exterior == "battle-scarred":
-        url += "?exterior=battle-scarred"
+        url += "?exteriors=Battle-Scarred"
     
     scraper = ShadowPaySkinScraper(url)
     service = SkinService(scraper)
