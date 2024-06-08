@@ -1,0 +1,10 @@
+setup.sh
+./setup.sh
+README.md
+./README.md
+./.gitignore
+.gitignore
+/venv
+venv/
+/env
+env/
