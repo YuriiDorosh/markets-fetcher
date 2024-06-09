@@ -1,7 +1,7 @@
-requests 
-beautifulsoup4
-selenium 
-webdriver-manager
-pyperclip
-aiohttp
-flask
+requests==2.32.3
+beautifulsoup==4.12.3
+selenium==4.21.0
+webdriver-manager==4.0.1
+pyperclip==1.8.2
+aiohttp==3.9.5
+flask==3.0.3
