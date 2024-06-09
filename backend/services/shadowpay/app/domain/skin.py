@@ -7,8 +7,8 @@ class Skin:
 
     def to_dict(self):
         return {
-            'name': self.name,
-            'price': self.price,
-            'share_link': self.share_link,
-            'game_link': self.game_link
+            "name": self.name,
+            "price": self.price,
+            "share_link": self.share_link,
+            "game_link": self.game_link,
         }
