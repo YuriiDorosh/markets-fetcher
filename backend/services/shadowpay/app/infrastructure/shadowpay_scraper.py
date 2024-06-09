@@ -77,19 +77,19 @@ class ShadowPaySkinScraper:
 
                 items = self.driver.find_elements(By.CSS_SELECTOR, "div.item-buy-card")
                 item = items[index]
-                
+
                 time.sleep(0.5)
-                
+
                 skin_name = item.find_element(
                     By.CSS_SELECTOR, "div.parse-color-item__name"
                 ).text
-                
+
                 price = (
                     item.find_element(By.CSS_SELECTOR, "div.item-buy-card__sell-price")
                     .text.split("\n")[0]
                     .strip()
                 )
-                
+
                 gun_type = item.find_element(
                     By.CSS_SELECTOR, "div.parseColorItemTransfer"
                 ).text
@@ -108,12 +108,11 @@ class ShadowPaySkinScraper:
                         logger.error(f"Click attempt {click_attempts + 1} failed: {e}")
                         time.sleep(1)
                         click_attempts += 1
-                
+
                 if not clicked:
                     logger.error("Failed to click item after 3 attempts")
                     continue
-                
-                
+
                 self.wait.until(
                     EC.presence_of_element_located(
                         (By.CSS_SELECTOR, "div.marketplace-content")
@@ -146,7 +145,7 @@ class ShadowPaySkinScraper:
 
         except Exception as e:
             logger.error(f"Error fetching skins: {e}")
-            self.driver.save_screenshot('error_fetching_skins.png')
+            self.driver.save_screenshot("error_fetching_skins.png")
 
         return skins
 
