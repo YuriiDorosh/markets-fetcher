@@ -1,4 +1,5 @@
 from flask import Flask
+
 from app.controllers.skin_controller import skin_controller
 from app.controllers.status_controller import status_controller
 
