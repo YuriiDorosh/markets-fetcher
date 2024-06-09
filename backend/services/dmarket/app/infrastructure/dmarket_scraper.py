@@ -6,7 +6,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import logging
 from app.domain.skin import Skin
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class DMartSkinScraper:
     def __init__(self, url):
@@ -58,7 +62,7 @@ class DMartSkinScraper:
             name = name_tag.get_attribute('alt') if name_tag else "N/A"
             price = price_tag.text.strip() if price_tag else "N/A"
         except Exception as e:
-            print(f"Error retrieving name or price for skin {skin_index + 1}: {e}")
+            logger.error(f"Error retrieving name or price for skin {skin_index + 1}: {e}")
             return None
 
         try:
@@ -66,7 +70,7 @@ class DMartSkinScraper:
             self.driver.execute_script("arguments[0].scrollIntoView(true);", info_icon)
             self.driver.execute_script("arguments[0].click();", info_icon)
         except Exception as e:
-            print(f"Error clicking info icon for skin {skin_index + 1}: {e}")
+            logger.error(f"Error clicking info icon for skin {skin_index + 1}: {e}")
             return None
                 
         time.sleep(1)  
@@ -78,14 +82,14 @@ class DMartSkinScraper:
             onboarding_close_button.click()
             time.sleep(1) 
         except Exception as e:
-            print("No onboarding popup detected")
+            logger.error("No onboarding popup detected")
 
         try:
             overlay = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, 'div.cdk-overlay-pane'))
             )
         except Exception as e:
-            print(f"Error loading overlay for skin {skin_index + 1}: {e}")
+            logger.error(f"Error loading overlay for skin {skin_index + 1}: {e}")
             return None
 
         try:
@@ -95,14 +99,14 @@ class DMartSkinScraper:
             self.driver.execute_script("arguments[0].click();", copy_button)
             time.sleep(1)  
         except Exception as e:
-            print(f"Error clicking copy button for skin {skin_index + 1}: {e}")
+            logger.error(f"Error clicking copy button for skin {skin_index + 1}: {e}")
             return None
 
         try:
             share_link_input = self.driver.find_element(By.CSS_SELECTOR, 'input.c-shareLink__input')
             share_link = share_link_input.get_attribute('value')
         except Exception as e:
-            print(f"Error retrieving share link for skin {skin_index + 1}: {e}")
+            logger.error(f"Error retrieving share link for skin {skin_index + 1}: {e}")
             return None
 
         try:
@@ -111,7 +115,7 @@ class DMartSkinScraper:
             )
             game_link = game_link_element.get_attribute('href')
         except Exception as e:
-            print(f"Error retrieving game link for skin {skin_index + 1}: {e}")
+            logger.error(f"Error retrieving game link for skin {skin_index + 1}: {e}")
             return None
 
         try:
@@ -119,7 +123,7 @@ class DMartSkinScraper:
             self.driver.execute_script("arguments[0].click();", close_button)
             time.sleep(1)  # Wait to ensure popup is closed
         except Exception as e:
-            print(f"Error closing popup for skin {skin_index + 1}: {e}")
+            logger.error(f"Error closing popup for skin {skin_index + 1}: {e}")
             return None
 
         return Skin(name, price, share_link, game_link)
@@ -128,7 +132,7 @@ class DMartSkinScraper:
         items = []
         self.search_skins(search_term, price_from, price_to)
 
-        for index in range(20): 
+        for index in range(15): 
             details = self.get_skin_details(index)
             if details:
                 items.append(details)

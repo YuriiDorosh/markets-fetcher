@@ -14,9 +14,9 @@ def get_skins():
     url = "https://dmarket.com/ingame-items/item-list/csgo-skins"
     
     if exterior == "factory":
-        url += "?exterior=factory"
+        url += "?exterior=factory new"
     elif exterior == "minimal":
-        url += "?exterior=minimal"
+        url += "?exterior=minimal wear"
     elif exterior == "field-tested":
         url += "?exterior=field-tested"
     elif exterior == "well-worn":
