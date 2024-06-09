@@ -1,5 +1,4 @@
-from flask import jsonify, Blueprint
-
+from flask import Blueprint, jsonify
 
 status_controller = Blueprint("status_controller", __name__)
 

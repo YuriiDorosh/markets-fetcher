@@ -1,5 +1,6 @@
 from app.infrastructure.dmarket_scraper import DMartSkinScraper
 
+
 class SkinService:
     def __init__(self, scraper: DMartSkinScraper):
         self.scraper = scraper
